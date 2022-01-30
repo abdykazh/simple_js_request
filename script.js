@@ -1,16 +1,22 @@
-document.getElementById("getPerson").addEventListener("click", function () {
-	myFunction();
-})
+document.getElementById("getPerson").addEventListener("click", (e) => {
+	e.preventDefault();
+	const nameText = document.getElementById("name");
+	const heightText = document.getElementById("height");
+	const genderText = document.getElementById("gender");
 
-function myFunction() {
+	nameText.innerHTML = '<em>Loading...</em>'
+	heightText.innerHTML = '<em>Loading...</em>'
+	genderText.innerHTML = '<em>Loading...</em>'
+
 	const num = Math.floor(Math.random() * 83)
 	fetch(`https://swapi.dev/api/people/${num}`)
 		.then(response => response.json())
 		.then(data => {
 			const person = data;
 			const { name, height, gender } = person;
-			document.getElementById("name").innerHTML = name;
-			document.getElementById("height").innerHTML = height;
-			document.getElementById("gender").innerHTML = gender;
+			nameText.innerHTML = name;
+			heightText.innerHTML = height;
+			genderText.innerHTML = gender;
 		})
-}
+})
+
